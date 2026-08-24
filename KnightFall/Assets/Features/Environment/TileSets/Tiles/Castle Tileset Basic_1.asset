@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Castle Tileset Basic_1
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.Tilemaps.Tile
-  m_Sprite: {fileID: 4223298456860413016, guid: b61aaa20e867c0a408cc5cc037adfb20, type: 3}
+  m_Sprite: {fileID: 4223298456860413016, guid: c61b3211a93c8704581888b67fd6631c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
