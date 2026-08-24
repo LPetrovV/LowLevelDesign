@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 58066de26e0c9584e814c4b4f1d3bbbb
+guid: c61b3211a93c8704581888b67fd6631c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4688848572088793055
-    second: Castly background_0
+      213: -4569193704784420431
+    second: Castle Tileset Basic_0
   - first:
-      213: 4438237631017710870
-    second: Castly background_1
+      213: 4223298456860413016
+    second: Castle Tileset Basic_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Castly background_0
+      name: Castle Tileset Basic_0
       rect:
         serializedVersion: 2
         x: 15
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd733f80fe2221140800000000000000
-      internalID: 4688848572088793055
+      spriteID: 1b1af5cb886f690c0800000000000000
+      internalID: -4569193704784420431
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Castly background_1
+      name: Castle Tileset Basic_1
       rect:
         serializedVersion: 2
         x: 127
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 615f4915c99c79d30800000000000000
-      internalID: 4438237631017710870
+      spriteID: 85cce9d029b2c9a30800000000000000
+      internalID: 4223298456860413016
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Castly background_0: 4688848572088793055
-      Castly background_1: 4438237631017710870
+      Castle Tileset Basic_0: -4569193704784420431
+      Castle Tileset Basic_1: 4223298456860413016
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
