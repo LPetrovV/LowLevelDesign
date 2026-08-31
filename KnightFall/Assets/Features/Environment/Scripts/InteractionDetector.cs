@@ -13,7 +13,7 @@ public class InteractionDetector : MonoBehaviour
             {
                 interactableInRange = interactable;
 
-                Debug.Log("Interactable entered: " + collision.gameObject.name);
+                //Debug.Log("Interactable entered: " + collision.gameObject.name);
             }
         }
     }
@@ -26,21 +26,19 @@ public class InteractionDetector : MonoBehaviour
             {
                 interactableInRange = null;
 
-                Debug.Log("Interactable left");
+                //Debug.Log("Interactable left");
             }
         }
     }
 
     public void Interact(InputAction.CallbackContext context)
     {
-        Debug.Log("Interacting!");
+        //Debug.Log("Interacting!");
         if (context.performed)
         {
             if (interactableInRange != null &&
                 interactableInRange.CanInteract())
             {
-                Debug.Log("Interacting!");
-
                 interactableInRange.Interact();
             }
         }
