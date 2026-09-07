@@ -269,8 +269,10 @@ GameObject:
   - component: {fileID: 1172396386}
   - component: {fileID: 1172396385}
   - component: {fileID: 1172396384}
+  - component: {fileID: 1172396389}
   - component: {fileID: 1172396383}
   - component: {fileID: 1172396387}
+  - component: {fileID: 1172396388}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -435,6 +437,52 @@ MonoBehaviour:
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   groundCheck: {fileID: 2082398852}
+  groundCheckRadius: 0.2
+  groundLayer:
+    m_Bits: 64
+  rb: {fileID: 0}
+  moveInput: 0
+  isGrounded: 0
+  jumpPressed: 0
+--- !u!95 &1172396388
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172396382}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7c6fd4ba355e3422eb9729cc71a05e67, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1172396389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172396382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3abc2f730394a05b197788a38409b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  moveSpeed: 8
+  jumpForce: 5
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
+  groundCheck: {fileID: 977711459}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
