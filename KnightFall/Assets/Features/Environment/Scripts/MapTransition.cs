@@ -30,10 +30,18 @@ public class MapTransition : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        {
-            confiner.BoundingShape2D = mapBoundary;
-        }
+    {
+        confiner.BoundingShape2D = mapBoundary;
+        confiner.InvalidateBoundingShapeCache();
+        
+        Vector3 oldPos = player.transform.position;
         UpdatePlayerPosition(player);
+        Vector3 delta = player.transform.position - oldPos;
+
+        var vcam = FindAnyObjectByType<CinemachineCamera>();
+        vcam.OnTargetObjectWarped(player.transform, delta);
+    }
+        
     }
 
     private void UpdatePlayerPosition(GameObject player)
@@ -43,6 +51,7 @@ public class MapTransition : MonoBehaviour
             player.transform.position = transportLocation.position;
             return;
         }
+        
 
         Vector3 additivePos = player.transform.position;
 
@@ -62,7 +71,7 @@ public class MapTransition : MonoBehaviour
                 break;
         }
 
-
+        player.transform.position = additivePos;
         
     }
 }
