@@ -44,6 +44,9 @@ TagManager:
   - name: Background
     uniqueID: 886656483
     locked: 0
+  - name: PuzzleBackground
+    uniqueID: 3834731143
+    locked: 0
   - name: Environment
     uniqueID: 2447986309
     locked: 0
