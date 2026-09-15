@@ -13,4 +13,19 @@ public class Coin : MonoBehaviour
     {
         
     }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // Add coin to player's inventory or score
+            Debug.Log("Coin collected!");
+            Destroy(gameObject);
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+            SkillPointManager skillPointManager = player.GetComponentInChildren<SkillPointManager>();
+            skillPointManager.AddSkillPoint();
+        }
+    }
 }
