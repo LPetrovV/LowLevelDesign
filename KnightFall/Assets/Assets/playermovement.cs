@@ -4,12 +4,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed = 8f;
+    public float moveSpeed;
 
     [Header("Jump")]
-    public float jumpForce = 14f;
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f;
+    public float jumpForce;
+    public float fallMultiplier;
 
     [Header("Ground Check")]
     public Transform groundCheck;
@@ -19,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+
     private float moveInput;
     private bool isGrounded;
     private bool jumpPressed;
@@ -28,50 +28,71 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        //Debug.Log("Awake: rb=" + rb + " animator=" + animator + " spriteRenderer=" + spriteRenderer);
     }
 
     void Update()
     {
+        // Get movement input
         moveInput = Input.GetAxisRaw("Horizontal");
-        if (Input.GetButtonDown("Jump")) jumpPressed = true;
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer)!=null;
+        // Detect jump press
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpPressed = true;
+        }
 
+        // Check if player is grounded
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheck.position,
+            groundCheckRadius,
+            groundLayer
+        ) != null;
+
+        // Flip player
         if (moveInput > 0)
+        {
             spriteRenderer.flipX = false;
+        }
         else if (moveInput < 0)
+        {
             spriteRenderer.flipX = true;
+        }
 
+        // Update animator
         animator.SetFloat("Speed", Mathf.Abs(moveInput));
         animator.SetBool("IsGrounded", isGrounded);
-
-        //Debug.Log("moveInput=" + moveInput + " Speed set to=" + Mathf.Abs(moveInput) + " isGrounded=" + isGrounded);
     }
 
     void FixedUpdate()
     {
-        //Debug.Log("Grounded: " + isGrounded);
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        // Horizontal movement
+        rb.linearVelocity = new Vector2(
+            moveInput * moveSpeed,
+            rb.linearVelocity.y
+        );
 
+        // Jump
         if (jumpPressed)
         {
-         if (isGrounded)
+            if (isGrounded)
             {
-             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                rb.linearVelocity = new Vector2(
+                    rb.linearVelocity.x,
+                    jumpForce
+                );
             }
 
+            // Consume jump input
             jumpPressed = false;
         }
 
+        // Faster falling
         if (rb.linearVelocity.y < 0)
         {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
-        }
-        else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+            rb.linearVelocity += Vector2.up *
+                Physics2D.gravity.y *
+                (fallMultiplier - 1) *
+                Time.fixedDeltaTime;
         }
     }
 }
