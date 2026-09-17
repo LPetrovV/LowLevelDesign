@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        Debug.Log("Awake: rb=" + rb + " animator=" + animator + " spriteRenderer=" + spriteRenderer);
+        //Debug.Log("Awake: rb=" + rb + " animator=" + animator + " spriteRenderer=" + spriteRenderer);
     }
 
     void Update()
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         moveInput = Input.GetAxisRaw("Horizontal");
         if (Input.GetButtonDown("Jump")) jumpPressed = true;
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer)!=null;
 
         if (moveInput > 0)
             spriteRenderer.flipX = false;
@@ -47,18 +47,23 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(moveInput));
         animator.SetBool("IsGrounded", isGrounded);
 
-        Debug.Log("moveInput=" + moveInput + " Speed set to=" + Mathf.Abs(moveInput) + " isGrounded=" + isGrounded);
+        //Debug.Log("moveInput=" + moveInput + " Speed set to=" + Mathf.Abs(moveInput) + " isGrounded=" + isGrounded);
     }
 
     void FixedUpdate()
     {
+        //Debug.Log("Grounded: " + isGrounded);
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
-        if (jumpPressed && isGrounded)
+        if (jumpPressed)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+         if (isGrounded)
+            {
+             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            }
+
+            jumpPressed = false;
         }
-        jumpPressed = false;
 
         if (rb.linearVelocity.y < 0)
         {
