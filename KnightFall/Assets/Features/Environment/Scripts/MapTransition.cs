@@ -6,8 +6,7 @@ using System.Collections.Generic;
 public class MapTransition : MonoBehaviour
 {
     [SerializeField] PolygonCollider2D mapBoundary;
-
-   [SerializeField] GameObject puzzleObject;
+    [SerializeField] GameObject player;
     CinemachineConfiner2D confiner;
     public Transform transportLocation;
     [SerializeField] Direction direction;
@@ -35,22 +34,12 @@ public class MapTransition : MonoBehaviour
         confiner.BoundingShape2D = mapBoundary;
         confiner.InvalidateBoundingShapeCache();
         
-        Vector3 oldPos = collision.transform.position;
-        UpdatePlayerPosition(collision.gameObject);
-        Vector3 delta = collision.transform.position - oldPos;
+        Vector3 oldPos = player.transform.position;
+        UpdatePlayerPosition(player);
+        Vector3 delta = player.transform.position - oldPos;
 
         var vcam = FindAnyObjectByType<CinemachineCamera>();
-        vcam.OnTargetObjectWarped(collision.transform, delta);
-
-        // reset puzzle if the player is entering a new map
-        if (puzzleObject != null)
-        {
-            Puzzle puzzle = puzzleObject.GetComponent<Puzzle>();
-            if (puzzle != null)
-            {
-                puzzle.ResetPuzzle();
-            }
-        }
+        vcam.OnTargetObjectWarped(player.transform, delta);
     }
         
     }

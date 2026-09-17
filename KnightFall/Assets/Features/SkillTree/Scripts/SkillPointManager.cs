@@ -23,13 +23,13 @@ public class SkillPointManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (Keyboard.current.kKey.wasPressedThisFrame) // placeholder test key
-        // {
-        //     AddSkillPoint();
-        // } 
+        if (Keyboard.current.kKey.wasPressedThisFrame) // placeholder test key
+        {
+            AddSkillPoint();
+        } 
     }
 
-    public void AddSkillPoint()
+    void AddSkillPoint()
     {
         AvailableSkillPoints++;
         OnSkillPointsChanged?.Invoke(AvailableSkillPoints);
