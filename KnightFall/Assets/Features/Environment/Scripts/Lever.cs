@@ -7,6 +7,7 @@ public class Lever : MonoBehaviour, IInteractable
 
     [SerializeField]
     public InteractionTarget TargetToActivate;
+    public InteractionTarget SecondaryTargetToActivate;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,6 +19,10 @@ public class Lever : MonoBehaviour, IInteractable
     {
         PullLever();
         TargetToActivate?.Activate();
+        if (SecondaryTargetToActivate != null)
+        {
+            SecondaryTargetToActivate.Activate();
+        }
     }
 
     public void PullLever()
