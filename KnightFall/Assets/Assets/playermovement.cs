@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
 
     private Rigidbody2D rb;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
     private float moveInput;
     private bool isGrounded;
     private bool jumpPressed;
@@ -24,6 +26,10 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        Debug.Log("Awake: rb=" + rb + " animator=" + animator + " spriteRenderer=" + spriteRenderer);
     }
 
     void Update()
@@ -33,8 +39,15 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        if (moveInput != 0)
-            transform.localScale = new Vector3(Mathf.Sign(moveInput), 1, 1);
+        if (moveInput > 0)
+            spriteRenderer.flipX = false;
+        else if (moveInput < 0)
+            spriteRenderer.flipX = true;
+
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
+        animator.SetBool("IsGrounded", isGrounded);
+
+        Debug.Log("moveInput=" + moveInput + " Speed set to=" + Mathf.Abs(moveInput) + " isGrounded=" + isGrounded);
     }
 
     void FixedUpdate()

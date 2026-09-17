@@ -413,8 +413,8 @@ Transform:
   m_GameObject: {fileID: 1172396382}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.31638, y: 0.17464, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.6804, y: -0.6284, z: 0}
+  m_LocalScale: {x: 1.7664945, y: 1.5608765, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2082398852}
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1172396382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0641ac6d9e8946ff96be3362110275d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f3abc2f730394a05b197788a38409b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playermovement
   moveSpeed: 8
@@ -439,11 +439,8 @@ MonoBehaviour:
   groundCheck: {fileID: 2082398852}
   groundCheckRadius: 0.2
   groundLayer:
+    serializedVersion: 2
     m_Bits: 64
-  rb: {fileID: 0}
-  moveInput: 0
-  isGrounded: 0
-  jumpPressed: 0
 --- !u!95 &1172396388
 Animator:
   serializedVersion: 7
