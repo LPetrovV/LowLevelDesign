@@ -2,7 +2,7 @@ using System.Reflection.Metadata.Ecma335;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IInteractable
 {
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
@@ -10,7 +10,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float colliderDistance;
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] public int health = 100;
     private float cooldownTimer = Mathf.Infinity;
+
+    private bool playerInSight = false;
 
     private Animator anim;
     private Health playerHealth;
@@ -38,6 +41,12 @@ public class Enemy : MonoBehaviour
 
         if (enemyPatrol != null)
             enemyPatrol.enabled = !PlayerInSight();
+
+        // bad code delete later
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
     }
 
     private bool PlayerInSight()
@@ -59,9 +68,60 @@ public class Enemy : MonoBehaviour
             new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
     }
 
-    private void DamagePlayer()
+    //bad code delete later
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (PlayerInSight())
+        if (collision.CompareTag("Player"))
+        {
+            playerInSight = true;
+            Debug.Log("Player entered: " + collision.gameObject.name);
+            DamagePlayer(damage);
+        }
+    }
+
+    //bad code delete later
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerInSight = false;
+            //Debug.Log("Player exited: " + collision.gameObject.name);
+        }
+    }
+
+    private void DamagePlayer(int damage)
+    {
+        //get player stats and decrease health
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        PlayerStats playerStats = player.GetComponent<PlayerStats>();
+        if (playerStats != null)
+        {
+            //Debug.Log("PlayerStats component found: " + playerStats.gameObject.name);
+            playerStats.DecreaseHealth(damage);
+            Debug.Log("Player health decreased by " + damage + ". Current health: " + playerStats.health);
+        }
             
+    }
+
+    public bool CanInteract()
+    {
+        return true;
+    }
+
+    public void Interact()
+    {
+        if (health <= 0)
+        {
+            EnemyDeath();
+        }
+        health -= 20; // Example damage value
+        Debug.Log("Enemy health decreased by 10. Current health: " + health);
+    }
+
+    public void EnemyDeath()
+    {
+        // Handle enemy death logic here
+        Debug.Log("Enemy has died.");
+        Destroy(gameObject);
     }
 }

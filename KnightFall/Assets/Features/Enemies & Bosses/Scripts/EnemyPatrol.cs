@@ -27,12 +27,18 @@ public class EnemyPatrol : MonoBehaviour
     }
     private void OnDisable()
     {
-        anim.SetBool("moving", false);
+        if (anim != null)
+        {
+            anim.SetBool("moving", false);
+        }
+        
     }
 
     private void Update()
     {
-        if (movingLeft)
+        if (enemy!= null)
+        {
+            if (movingLeft)
         {
             if (enemy.position.x >= leftEdge.position.x)
                 MoveInDirection(-1);
@@ -46,6 +52,8 @@ public class EnemyPatrol : MonoBehaviour
             else
                 DirectionChange();
         }
+        }
+        
     }
 
     private void DirectionChange()
