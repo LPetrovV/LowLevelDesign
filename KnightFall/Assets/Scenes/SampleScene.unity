@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 11496236}
   m_Layer: 3
   m_Name: Spot Light 2D
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78854,7 +78854,7 @@ GameObject:
   - component: {fileID: 471131708}
   m_Layer: 0
   m_Name: SkillPointManager
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81184,7 +81184,7 @@ GameObject:
   - component: {fileID: 753342632}
   m_Layer: 0
   m_Name: groundcheck
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109461,7 +109461,7 @@ GameObject:
   - component: {fileID: 1541540872}
   m_Layer: 0
   m_Name: SpawnPoints
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
