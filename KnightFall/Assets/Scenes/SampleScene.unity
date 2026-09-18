@@ -3202,6 +3202,7 @@ GameObject:
   - component: {fileID: 97306663}
   - component: {fileID: 97306661}
   - component: {fileID: 97306662}
+  - component: {fileID: 97306666}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3265,7 +3266,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.06030464, y: 0.0013109446}
+  m_Offset: {x: -0.44413453, y: -0.029409885}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3275,7 +3276,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.25536728, y: 0.48347926}
+  m_Size: {x: 1.2925876, y: 2.9240818}
   m_EdgeRadius: 0
 --- !u!50 &97306663
 Rigidbody2D:
@@ -3379,6 +3380,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1864979195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &97306666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97306660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6919a5fdd5e6cae469f0906d99ce985a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  attackCooldown: 1
+  range: 1
+  damage: 1
+  colliderDistance: 1.5
+  boxCollider: {fileID: 97306662}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &112148460
 GameObject:
   m_ObjectHideFlags: 0
@@ -82698,6 +82719,7 @@ GameObject:
   - component: {fileID: 977930419}
   - component: {fileID: 977930417}
   - component: {fileID: 977930418}
+  - component: {fileID: 977930422}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -82761,7 +82783,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.06030464, y: 0.0013109446}
+  m_Offset: {x: -0.39119285, y: -0.020754397}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -82771,7 +82793,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.25536728, y: 0.48347926}
+  m_Size: {x: 1.3898183, y: 2.918077}
   m_EdgeRadius: 0
 --- !u!50 &977930419
 Rigidbody2D:
@@ -82875,6 +82897,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 324755101}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &977930422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977930416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6919a5fdd5e6cae469f0906d99ce985a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  attackCooldown: 1
+  range: 1
+  damage: 1
+  colliderDistance: 1.5
+  boxCollider: {fileID: 977930418}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &984006214
 GameObject:
   m_ObjectHideFlags: 0
@@ -111509,6 +111551,7 @@ GameObject:
   - component: {fileID: 1692632851}
   - component: {fileID: 1692632849}
   - component: {fileID: 1692632850}
+  - component: {fileID: 1692632854}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -111572,7 +111615,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.06030464, y: 0.0013109446}
+  m_Offset: {x: -0.42333356, y: -0.022996068}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -111582,7 +111625,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.25536728, y: 0.48347926}
+  m_Size: {x: 1.2977172, y: 2.9187152}
   m_EdgeRadius: 0
 --- !u!50 &1692632851
 Rigidbody2D:
@@ -111686,6 +111729,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1534075479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1692632854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692632848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6919a5fdd5e6cae469f0906d99ce985a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  attackCooldown: 1
+  range: 1
+  damage: 1
+  colliderDistance: 1.5
+  boxCollider: {fileID: 1692632850}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1695940127
 GameObject:
   m_ObjectHideFlags: 0
