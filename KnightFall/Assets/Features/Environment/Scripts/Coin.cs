@@ -22,7 +22,7 @@ public class Coin : MonoBehaviour
             Debug.Log("Coin collected!");
             Destroy(gameObject);
 
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            GameObject player = other.gameObject;
 
             SkillPointManager skillPointManager = player.GetComponentInChildren<SkillPointManager>();
             skillPointManager.AddSkillPoint();
