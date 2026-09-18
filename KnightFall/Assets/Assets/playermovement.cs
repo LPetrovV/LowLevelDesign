@@ -16,6 +16,13 @@ public class PlayerMovement : MonoBehaviour
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
 
+    [Header("Attack")]
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayer;
+    public float attackCooldown = 0.4f;
+    private float lastAttackTime;
+
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -28,8 +35,6 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        Debug.Log("Awake: rb=" + rb + " animator=" + animator + " spriteRenderer=" + spriteRenderer);
     }
 
     void Update()
@@ -40,14 +45,42 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         if (moveInput > 0)
+        {
             spriteRenderer.flipX = false;
+            attackPoint.localPosition = new Vector3(Mathf.Abs(attackPoint.localPosition.x), attackPoint.localPosition.y, 0);
+        }
         else if (moveInput < 0)
+        {
             spriteRenderer.flipX = true;
+            attackPoint.localPosition = new Vector3(-Mathf.Abs(attackPoint.localPosition.x), attackPoint.localPosition.y, 0);
+        }
 
         animator.SetFloat("Speed", Mathf.Abs(moveInput));
         animator.SetBool("IsGrounded", isGrounded);
 
-        Debug.Log("moveInput=" + moveInput + " Speed set to=" + Mathf.Abs(moveInput) + " isGrounded=" + isGrounded);
+        if (Input.GetKeyDown(KeyCode.E) && Time.time >= lastAttackTime + attackCooldown)
+        {
+            Attack();
+        }
+    }
+
+    void Attack()
+    {
+        lastAttackTime = Time.time;
+        animator.SetTrigger("Attack");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("Hit: " + enemy.name);
+            // enemy.GetComponent<EnemyHealth>()?.TakeDamage(10);
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null) return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
     void FixedUpdate()
