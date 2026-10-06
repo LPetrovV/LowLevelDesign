@@ -1,16 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SkillMenuToggle : MonoBehaviour
+public class MenuToggle : MonoBehaviour
 {
-    public GameObject skillTreeCanvas;
+    public GameObject menuCanvas;
     public Key toggleKey = Key.Tab;
 
     void Update()
     {
         if (Keyboard.current[toggleKey].wasPressedThisFrame)
         {
-            skillTreeCanvas.SetActive(!skillTreeCanvas.activeSelf);
+            menuCanvas.SetActive(!menuCanvas.activeSelf);
         }
     }
 }
