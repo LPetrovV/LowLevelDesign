@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance;
+    public int coins = 0;
     public int health = 100;
     public int speed = 5;
     public int dexterity = 5;
