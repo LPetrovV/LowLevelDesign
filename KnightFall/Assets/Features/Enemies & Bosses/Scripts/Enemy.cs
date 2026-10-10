@@ -85,22 +85,17 @@ public class Enemy : MonoBehaviour, IInteractable
         if (collision.CompareTag("Player"))
         {
             playerInSight = false;
-            //Debug.Log("Player exited: " + collision.gameObject.name);
         }
     }
 
     private void DamagePlayer(int damage)
     {
-        //get player stats and decrease health
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        PlayerStats playerStats = player.GetComponent<PlayerStats>();
-        if (playerStats != null)
-        {
-            //Debug.Log("PlayerStats component found: " + playerStats.gameObject.name);
-            playerStats.DecreaseHealth(damage);
-            Debug.Log("Player health decreased by " + damage + ". Current health: " + playerStats.health);
-        }
-            
+        if (player == null) return;
+
+        PlayerMovement movement = player.GetComponent<PlayerMovement>();
+        if (movement != null)
+            movement.TakeDamage(damage, transform.position);
     }
 
     public bool CanInteract()
@@ -116,6 +111,15 @@ public class Enemy : MonoBehaviour, IInteractable
         }
         health -= 20; // Example damage value
         Debug.Log("Enemy health decreased by 10. Current health: " + health);
+    }
+
+    // Called by the player's attack
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+        Debug.Log("Enemy took " + amount + " damage. Current health: " + health);
+        if (health <= 0)
+            EnemyDeath();
     }
 
     public void EnemyDeath()
