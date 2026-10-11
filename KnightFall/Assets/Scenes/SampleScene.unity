@@ -84071,10 +84071,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   coins: 0
+  xp: 0
   health: 100
   speed: 5
   dexterity: 5
   combat: 5
+  respawnHealth: 100
 --- !u!1 &1022364227
 GameObject:
   m_ObjectHideFlags: 0
@@ -115464,9 +115466,8 @@ MonoBehaviour:
   inventoryPanel: {fileID: 2073545694}
   slotPrefab: {fileID: 649437085620605807, guid: c4bbfe692f4eac04c807101057033efc, type: 3}
   slotCount: 12
-  itemPrefabs:
-  - {fileID: 8599762908923766473, guid: bb56a52a3aaf10f4482f2b3142c3f8f5, type: 3}
-  - {fileID: 8599762908923766473, guid: bb56a52a3aaf10f4482f2b3142c3f8f5, type: 3}
+  itemPrefabs: []
+  playerStats: {fileID: 1018455872}
 --- !u!1 &1989692209
 GameObject:
   m_ObjectHideFlags: 0
