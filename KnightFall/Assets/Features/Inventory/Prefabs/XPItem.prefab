@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7936822968949931027}
   - component: {fileID: 8572134820856166544}
   - component: {fileID: 1662275068579314635}
-  - component: {fileID: 6999719180375964878}
+  - component: {fileID: 1032470289325112906}
   m_Layer: 5
-  m_Name: Item
+  m_Name: XPItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2545867631148853944, guid: 81d776a06491f904facc5a48547ed9fd, type: 3}
+  m_Sprite: {fileID: -7751313168313644061, guid: 81d776a06491f904facc5a48547ed9fd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -89,7 +89,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &6999719180375964878
+--- !u!114 &1032470289325112906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,6 +98,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8599762908923766473}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da2ac91ee7c7e5748a8f04ce9e6e0329, type: 3}
+  m_Script: {fileID: 11500000, guid: c3122231f8f09f046872ce734a9e808a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemDragHandler
+  m_EditorClassIdentifier: InventoryModule::XPItem
+  price: 5
+  itemName: XP Orb
+  xpBuff: 50
