@@ -4,7 +4,7 @@ public class XPItem : Item
 {
     public int xpBuff = 50;
     
-    public int getBuff()
+    public override int getBuff()
     {
         return this.xpBuff;
     }

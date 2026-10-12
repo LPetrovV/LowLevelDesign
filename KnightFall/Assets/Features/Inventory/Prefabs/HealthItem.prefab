@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7936822968949931027}
   - component: {fileID: 8572134820856166544}
   - component: {fileID: 1662275068579314635}
-  - component: {fileID: 6999719180375964878}
   - component: {fileID: 2208419269332257108}
   m_Layer: 5
   m_Name: HealthItem
@@ -90,18 +89,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &6999719180375964878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8599762908923766473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da2ac91ee7c7e5748a8f04ce9e6e0329, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemDragHandler
 --- !u!114 &2208419269332257108
 MonoBehaviour:
   m_ObjectHideFlags: 0

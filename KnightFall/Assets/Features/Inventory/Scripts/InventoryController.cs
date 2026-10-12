@@ -20,17 +20,21 @@ public class InventoryController : MonoBehaviour
             {
                 GameObject itemObject = Instantiate(itemPrefabs[i], slot.transform);
                 itemObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-                slot.currentItem = itemObject;
 
                 Item item = itemObject.GetComponent<Item>();
                 if (item != null)
+                {
+                    slot.currentItem = item;
                     inventoryItems.Add(item);
+                }
+                   
             }
         }
     }
 
     public bool useItem(Item item)
     {
+        Debug.Log("item used");
         if (item == null)
             return false;
 
@@ -52,7 +56,7 @@ public class InventoryController : MonoBehaviour
         inventoryItems.Remove(item);
         itemPrefabs.Remove(item.gameObject);
 
-        Destroy(item.gameObject); // now only destroys the item's own object
+        Destroy(item.gameObject); 
 
         return true;
     }

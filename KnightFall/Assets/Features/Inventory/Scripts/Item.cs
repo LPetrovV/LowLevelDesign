@@ -19,4 +19,9 @@ public class Item : MonoBehaviour
     {
         return;
     }
+
+    public virtual int getBuff()
+    {
+        return 0;
+    }
 }
