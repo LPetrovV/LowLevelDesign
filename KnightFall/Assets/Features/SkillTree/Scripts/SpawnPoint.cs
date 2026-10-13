@@ -4,6 +4,7 @@ public class SpawnPoint : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
    [SerializeField] private Sprite SpriteActivated;
+   private Sprite SpriteDeactivated;
 
     private SpriteRenderer spriteRenderer;
     private RespawnHandler respawnHandler;
@@ -13,31 +14,31 @@ public class SpawnPoint : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        SpriteDeactivated = spriteRenderer.sprite; // Store the initial sprite as the deactivated state
         respawnHandler = GetComponentInParent<RespawnHandler>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !isActivated)
+    {
+        if (respawnHandler != null)
         {
-            //Debug.Log("Player has entered the spawn point.");
-
-            ActivateSpawnPoint();
-
-            BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
-            boxCollider.enabled = false; // Disable the collider to prevent reactivation
+            respawnHandler.SetRespawnLocation(this);
         }
     }
+    }
 
-    private void ActivateSpawnPoint()
+    public void ActivateSpawnPoint()
     {
         spriteRenderer.sprite = SpriteActivated;
         isActivated = true;
-
-        // Set this spawn point as the new respawn location
-        respawnHandler.SetRespawnLocation(transform.position);
+    }
+    
+    public void DeactivateSpawnPoint()
+    {
+        spriteRenderer.sprite = SpriteDeactivated;
+        isActivated = false;
     }
 
     public bool IsActivated()
