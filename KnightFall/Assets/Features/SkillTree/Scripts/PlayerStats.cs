@@ -3,10 +3,14 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance;
-    public int health = 100;
+    public int coins = 0;
+    public int xp = 0;
+    public int health = 80;
     public int speed = 5;
     public int dexterity = 5;
     public int combat = 5;
+
+    public int respawnHealth = 100;
 
     void Awake()
     {
@@ -15,33 +19,33 @@ public class PlayerStats : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         if (health <= 0)
-        {
-            health = 0;
-            PlayerDeath();
-        }
+            Die();
+    }
+
+    private void Die()
+    {
+        health = 0;
+        PlayerDeath();
     }
 
     public void DecreaseHealth(int amount)
     {
         health -= amount;
         if (health <= 0)
-        {
-            health = 0;
-            PlayerDeath();
-        }
+            Die();
     }
 
     public void PlayerDeath()
     {
         //respawn player and reset health
-        health = 100;
+        
 
         GameObject respawnHandler = GameObject.FindGameObjectWithTag("Respawn");
 
@@ -62,5 +66,13 @@ public class PlayerStats : MonoBehaviour
         {
             Debug.LogError("No GameObject with the 'Respawn' tag was found.");
         }
+
+        health = respawnHealth;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 }
