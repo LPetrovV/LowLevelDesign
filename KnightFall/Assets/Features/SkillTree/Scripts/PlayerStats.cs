@@ -45,7 +45,7 @@ public class PlayerStats : MonoBehaviour
     public void PlayerDeath()
     {
         //respawn player and reset health
-        health = respawnHealth;
+        
 
         GameObject respawnHandler = GameObject.FindGameObjectWithTag("Respawn");
 
@@ -66,6 +66,8 @@ public class PlayerStats : MonoBehaviour
         {
             Debug.LogError("No GameObject with the 'Respawn' tag was found.");
         }
+
+        health = respawnHealth;
     }
 
     void OnDestroy()
