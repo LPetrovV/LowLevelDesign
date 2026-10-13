@@ -5,6 +5,7 @@ public class InventoryController : MonoBehaviour
 {
     public GameObject inventoryPanel;
     public GameObject slotPrefab;
+    private readonly List<Slot> slots = new List<Slot>();
     public int slotCount;
     public List<GameObject> itemPrefabs = new List<GameObject>();
     private readonly List<Item> inventoryItems = new List<Item>();
@@ -16,6 +17,7 @@ public class InventoryController : MonoBehaviour
         for (int i = 0; i < slotCount; i++)
         {
             Slot slot = Instantiate(slotPrefab, inventoryPanel.transform).GetComponent<Slot>();
+            slots.Add(slot);
             if (i < itemPrefabs.Count)
             {
                 GameObject itemObject = Instantiate(itemPrefabs[i], slot.transform);
@@ -27,9 +29,25 @@ public class InventoryController : MonoBehaviour
                     slot.currentItem = item;
                     inventoryItems.Add(item);
                 }
-                   
+
             }
         }
+    }
+
+    public bool AddItem(GameObject prefab)
+    {
+        Slot free = slots.Find(s => s.currentItem == null);
+        if (free == null) return false; // inventory full
+
+        GameObject itemObject = Instantiate(prefab, free.transform);
+        itemObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+        Item item = itemObject.GetComponent<Item>();
+        if (item == null) { Destroy(itemObject); return false; }
+
+        free.currentItem = item;
+        inventoryItems.Add(item);
+        return true;
     }
 
     public bool useItem(Item item)
@@ -56,7 +74,10 @@ public class InventoryController : MonoBehaviour
         inventoryItems.Remove(item);
         itemPrefabs.Remove(item.gameObject);
 
-        Destroy(item.gameObject); 
+        Slot usedSlot = slots.Find(s => s.currentItem == item);
+        if (usedSlot != null) usedSlot.currentItem = null;
+
+        Destroy(item.gameObject);
 
         return true;
     }
