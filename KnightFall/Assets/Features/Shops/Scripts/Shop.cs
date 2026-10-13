@@ -3,7 +3,7 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     [SerializeField] private GameObject shopPanel;
-    [SerializeField] private KeyCode interactKey = KeyCode.P;
+    [SerializeField] private KeyCode interactKey = KeyCode.Q;
 
     private bool playerInRange = false;
 
@@ -33,4 +33,5 @@ public class Shop : MonoBehaviour
             shopPanel.SetActive(false); // walk away
         }
     }
+
 }
