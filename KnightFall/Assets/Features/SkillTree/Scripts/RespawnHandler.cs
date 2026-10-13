@@ -8,10 +8,13 @@ public class RespawnHandler : MonoBehaviour
 
     private GameObject player;
 
+    
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         spawnPoints = new List<SpawnPoint>(GetComponentsInChildren<SpawnPoint>());
+
     }
 
     public void SetRespawnLocation(SpawnPoint spawnPoint)
