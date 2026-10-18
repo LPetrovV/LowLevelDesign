@@ -10,6 +10,6 @@ public class HealthItem : Item
 
     public override void Use(PlayerStats playerStats)
     {
-        playerStats.health += healthBuff;
+        playerStats.Heal(healthBuff);
     }
 }
