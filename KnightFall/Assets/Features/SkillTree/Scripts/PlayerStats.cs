@@ -84,6 +84,9 @@ public class PlayerStats : MonoBehaviour
             Debug.LogError("No GameObject with the 'Respawn' tag was found.");
         }
 
+        // half coins on death 
+        coins = coins/2;
+        
         health = respawnHealth;
         UpdateHealthBar();
     }
