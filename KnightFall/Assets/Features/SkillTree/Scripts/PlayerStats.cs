@@ -6,6 +6,11 @@ public class PlayerStats : MonoBehaviour
     public int coins = 0;
     public int xp = 0;
     public int health = 80;
+
+    // addition made during health bar UI
+    public int maxHealth = 100; 
+    private HealthBarUI healthBar;
+
     public int speed = 5;
     public int dexterity = 5;
     public int combat = 5;
@@ -19,12 +24,17 @@ public class PlayerStats : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        healthBar = FindFirstObjectByType<HealthBarUI>();
+        UpdateHealthBar();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // debug and test of the health bar
+        if (Input.GetKeyDown(KeyCode.K))
+            DecreaseHealth(10);
+
         if (health <= 0)
             Die();
     }
@@ -40,6 +50,13 @@ public class PlayerStats : MonoBehaviour
         health -= amount;
         if (health <= 0)
             Die();
+        UpdateHealthBar();
+    }
+    
+    public void Heal(int amount)
+    {
+        health = Mathf.Min(health + amount, maxHealth);
+        UpdateHealthBar();
     }
 
     public void PlayerDeath()
@@ -68,11 +85,19 @@ public class PlayerStats : MonoBehaviour
         }
 
         health = respawnHealth;
+        UpdateHealthBar();
     }
 
     void OnDestroy()
     {
         if (Instance == this)
             Instance = null;
+    }
+
+    public void UpdateHealthBar()
+    {
+        if (healthBar == null) return;
+        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetHealth(health);
     }
 }
