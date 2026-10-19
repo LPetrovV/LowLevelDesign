@@ -13,7 +13,6 @@ the environment and discover hidden levels.
 - Item Shop
 - Map
 - Player Inventory
-- Starter Tutorial
 - Interactable Environment
 - Item / Potion Usage
 - Currency System
