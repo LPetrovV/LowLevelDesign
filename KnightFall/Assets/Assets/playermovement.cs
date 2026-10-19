@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -22,20 +21,11 @@ public class PlayerMovement : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask enemyLayer;
     public float attackCooldown = 0.4f;
-    public int attackDamage = 10;
     private float lastAttackTime;
-
-    [Header("Hurt")]
-    public float stunDuration = 0.3f;
-    public float invincibilityDuration = 1f;
-    public Vector2 knockbackForce = new Vector2(6f, 5f);
-    private bool isStunned;
-    private bool isInvincible;
 
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-    private PlayerStats stats;
     private float moveInput;
     private bool isGrounded;
     private bool jumpPressed;
@@ -45,23 +35,14 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        stats = GetComponent<PlayerStats>();
     }
 
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        animator.SetBool("IsGrounded", isGrounded);
-
-        if (isStunned)
-        {
-            moveInput = 0;
-            animator.SetFloat("Speed", 0);
-            return;
-        }
-
         moveInput = Input.GetAxisRaw("Horizontal");
         if (Input.GetButtonDown("Jump")) jumpPressed = true;
+
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         if (moveInput > 0)
         {
@@ -75,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         animator.SetFloat("Speed", Mathf.Abs(moveInput));
+        animator.SetBool("IsGrounded", isGrounded);
 
         if (Input.GetKeyDown(KeyCode.E) && Time.time >= lastAttackTime + attackCooldown)
         {
@@ -88,46 +70,11 @@ public class PlayerMovement : MonoBehaviour
         animator.SetTrigger("Attack");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
-        foreach (Collider2D col in hitEnemies)
+        foreach (Collider2D enemy in hitEnemies)
         {
-            Enemy enemy = col.GetComponentInParent<Enemy>();
-            if (enemy != null)
-                enemy.TakeDamage(attackDamage);
+            Debug.Log("Hit: " + enemy.name);
+            // enemy.GetComponent<EnemyHealth>()?.TakeDamage(10);
         }
-    }
-
-    public void TakeDamage(int amount, Vector2 damageSourcePosition)
-    {
-        if (isInvincible) return;
-
-        if (stats != null) stats.DecreaseHealth(amount);
-        animator.SetTrigger("Hurt");
-
-        float dir = transform.position.x >= damageSourcePosition.x ? 1f : -1f;
-        rb.linearVelocity = new Vector2(dir * knockbackForce.x, knockbackForce.y);
-
-        StartCoroutine(HurtRoutine());
-    }
-
-    IEnumerator HurtRoutine()
-    {
-        isStunned = true;
-        isInvincible = true;
-
-        yield return new WaitForSeconds(stunDuration);
-        isStunned = false;
-
-        float remaining = invincibilityDuration - stunDuration;
-        float timer = 0f;
-        while (timer < remaining)
-        {
-            spriteRenderer.enabled = !spriteRenderer.enabled;
-            yield return new WaitForSeconds(0.1f);
-            timer += 0.1f;
-        }
-
-        spriteRenderer.enabled = true;
-        isInvincible = false;
     }
 
     void OnDrawGizmosSelected()
@@ -138,13 +85,14 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isStunned)
-            rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
         if (jumpPressed)
         {
-            if (isGrounded && !isStunned)
+            if (isGrounded)
+            {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            }
             jumpPressed = false;
         }
 
@@ -152,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
         }
-        else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump") && !isStunned)
+        else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump"))
         {
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
