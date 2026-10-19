@@ -35,7 +35,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-    private PlayerStats stats;
+    // TEMP: PlayerStats not found after merge, reconnect once we know the new health script
+    // private PlayerStats stats;
     private float moveInput;
     private bool isGrounded;
     private bool jumpPressed;
@@ -45,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        stats = GetComponent<PlayerStats>();
+        // stats = GetComponent<PlayerStats>();
     }
 
     void Update()
@@ -90,9 +91,11 @@ public class PlayerMovement : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         foreach (Collider2D col in hitEnemies)
         {
-            Enemy enemy = col.GetComponentInParent<Enemy>();
-            if (enemy != null)
-                enemy.TakeDamage(attackDamage);
+            // TEMP: Enemy class not found after merge, reconnect once we know the real class name
+            // Enemy enemy = col.GetComponentInParent<Enemy>();
+            // if (enemy != null)
+            //     enemy.TakeDamage(attackDamage);
+            Debug.Log("Hit: " + col.name);
         }
     }
 
@@ -100,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isInvincible) return;
 
-        if (stats != null) stats.DecreaseHealth(amount);
+        // if (stats != null) stats.DecreaseHealth(amount);
         animator.SetTrigger("Hurt");
 
         float dir = transform.position.x >= damageSourcePosition.x ? 1f : -1f;
