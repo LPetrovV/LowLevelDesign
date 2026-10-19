@@ -7,18 +7,6 @@ public class InteractionDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Enemy"))
-        {
-            //Debug.Log("Enemy entered: " + collision.gameObject.name);
-            Enemy enemy = collision.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                //Debug.Log("Enemy component found: " + enemy.gameObject.name);
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                enemy.OnTriggerEnter2D(player.GetComponent<Collider2D>());
-            }
-        }
-
         if (collision.TryGetComponent(out IInteractable interactable))
         {
             if (interactable.CanInteract())

@@ -148508,6 +148508,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   health: 100
+  xpReward: 25
+  hitTime: 0.3
+  attackClipLength: 0.67
+  hurtClipLength: 0.42
+  deathClipLength: 0.82
 --- !u!61 &495021502
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151541,6 +151546,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   health: 100
+  xpReward: 25
+  hitTime: 0.3
+  attackClipLength: 0.67
+  hurtClipLength: 0.42
+  deathClipLength: 0.82
 --- !u!61 &792052353
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -178918,6 +178928,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   health: 100
+  xpReward: 25
+  hitTime: 0.3
+  attackClipLength: 0.67
+  hurtClipLength: 0.42
+  deathClipLength: 0.82
 --- !u!61 &1266876053
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -181283,6 +181298,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   health: 100
+  xpReward: 25
+  hitTime: 0.3
+  attackClipLength: 0.67
+  hurtClipLength: 0.42
+  deathClipLength: 0.82
 --- !u!61 &1540049527
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -182441,7 +182461,6 @@ GameObject:
   - component: {fileID: 1692632849}
   - component: {fileID: 1692632850}
   - component: {fileID: 1692632854}
-  - component: {fileID: 1692632855}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -182640,20 +182659,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   health: 100
---- !u!114 &1692632855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1692632848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883e207bb3bb5464abde12b5d2ba8fde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  health: 3
-  anim: {fileID: 1692632849}
+  xpReward: 25
+  hitTime: 0.3
+  attackClipLength: 0.67
+  hurtClipLength: 0.42
+  deathClipLength: 0.82
 --- !u!1 &1694008624
 GameObject:
   m_ObjectHideFlags: 0
