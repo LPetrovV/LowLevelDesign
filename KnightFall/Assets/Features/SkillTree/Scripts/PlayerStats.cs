@@ -6,6 +6,8 @@ public class PlayerStats : MonoBehaviour
     public int coins = 0;
     public int xp = 0;
     public int health = 80;
+    public int XpToNextLevel => 100 + (level - 1) * 50;
+    public int level = 1;
 
     // addition made during health bar UI
     public int maxHealth = 100; 
@@ -16,6 +18,9 @@ public class PlayerStats : MonoBehaviour
     public int combat = 5;
 
     public int respawnHealth = 100;
+
+    public static event System.Action<int, int, int> OnXpChanged;  // level, xp, xpToNext
+    public static event System.Action<int> OnLevelUp;
 
     void Awake()
     {
@@ -103,4 +108,22 @@ public class PlayerStats : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
         healthBar.SetHealth(health);
     }
+
+    public void AddXP(int amount)
+{
+    if (amount <= 0) return;
+    xp += amount;
+
+    while (xp >= XpToNextLevel)          // loop so one big reward can give several levels
+    {
+        xp -= XpToNextLevel;
+        level++;
+        if (SkillPointManager.Instance != null)
+            SkillPointManager.Instance.AddSkillPoint();
+        OnLevelUp?.Invoke(level);
+    }
+    NotifyXpChanged();
+}
+
+public void NotifyXpChanged() => OnXpChanged?.Invoke(level, xp, XpToNextLevel);
 }
