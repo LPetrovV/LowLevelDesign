@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] public int health = 100;
-    [SerializeField] private int xpReward = 25;
+    [SerializeField] private int xpReward = 50;
 
     [Header("Animation timing (seconds)")]
     [Tooltip("How far into the swing the damage lands. Scrub attack.anim to find the hit frame.")]
@@ -153,7 +153,7 @@ public class Enemy : MonoBehaviour
         anim.SetBool("dead", true);
 
         // If you added the XP system, uncomment this:
-        // if (PlayerStats.Instance != null) PlayerStats.Instance.AddXP(xpReward);
+        if (PlayerStats.Instance != null) PlayerStats.Instance.AddXP(xpReward);
 
         // Let the death animation play, then remove the whole patrol group.
         GameObject root = enemyPatrol != null ? enemyPatrol.gameObject : gameObject;
