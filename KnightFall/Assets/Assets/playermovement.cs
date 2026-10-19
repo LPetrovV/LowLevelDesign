@@ -87,13 +87,12 @@ public class PlayerMovement : MonoBehaviour
         lastAttackTime = Time.time;
         animator.SetTrigger("Attack");
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
-        foreach (Collider2D col in hitEnemies)
-        {
-            Enemy enemy = col.GetComponentInParent<Enemy>();
-            if (enemy != null)
-                enemy.TakeDamage(attackDamage);
-        }
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+    foreach (Collider2D hit in hitEnemies)
+    {
+        Enemy enemy = hit.GetComponentInParent<Enemy>();
+        if (enemy != null) enemy.TakeDamage(20);
+    }
     }
 
     public void TakeDamage(int amount, Vector2 damageSourcePosition)
