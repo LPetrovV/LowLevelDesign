@@ -40,4 +40,10 @@ public class Chest : MonoBehaviour, IInteractable
     {
         return !isOpened;
     }
+
+       public void LoadOpened()
+   {
+       isOpened = true;
+       if (anim != null) anim.SetBool("isOpened", true);
+   }
 }

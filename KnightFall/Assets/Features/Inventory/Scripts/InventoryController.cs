@@ -9,6 +9,7 @@ public class InventoryController : MonoBehaviour
     public int slotCount;
     public List<GameObject> itemPrefabs = new List<GameObject>();
     private readonly List<Item> inventoryItems = new List<Item>();
+    public List<GameObject> itemCatalog = new List<GameObject>();
 
     public PlayerStats playerStats;
 
@@ -96,5 +97,33 @@ public class InventoryController : MonoBehaviour
         itemPrefabs.Add(itemObject);
         inventoryItems.Add(newItem);
         return newItem;
+    }
+
+
+
+    public List<string> GetItemNames()
+    {
+        var names = new List<string>();
+        foreach (var s in slots)
+            if (s.currentItem != null) names.Add(s.currentItem.getName());
+        return names;
+    }
+
+    public void LoadItems(List<string> names)
+    {
+        foreach (var s in slots)
+        {
+            if (s.currentItem != null) Destroy(s.currentItem.gameObject);
+            s.currentItem = null;
+        }
+        inventoryItems.Clear();
+
+        foreach (string n in names)
+        {
+            GameObject prefab = itemCatalog.Find(p => p != null && p.GetComponent<Item>() != null
+                                                      && p.GetComponent<Item>().getName() == n);
+            if (prefab != null) AddItem(prefab);
+            else Debug.LogWarning($"Saved item '{n}' not found in Item Catalog.");
+        }
     }
 }
