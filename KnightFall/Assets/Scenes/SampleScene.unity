@@ -188104,6 +188104,7 @@ GameObject:
   - component: {fileID: 1985031719}
   - component: {fileID: 1985031720}
   - component: {fileID: 1985031721}
+  - component: {fileID: 1985031722}
   m_Layer: 3
   m_Name: GameController
   m_TagString: GameController
@@ -188220,6 +188221,9 @@ MonoBehaviour:
   slotPrefab: {fileID: 649437085620605807, guid: c4bbfe692f4eac04c807101057033efc, type: 3}
   slotCount: 12
   itemPrefabs: []
+  itemCatalog:
+  - {fileID: 8599762908923766473, guid: bb56a52a3aaf10f4482f2b3142c3f8f5, type: 3}
+  - {fileID: 8599762908923766473, guid: 4877dba9d7eeba24fab2ad942a2d73ec, type: 3}
   playerStats: {fileID: 1018455872}
 --- !u!114 &1985031721
 MonoBehaviour:
@@ -188238,6 +188242,19 @@ MonoBehaviour:
   itemNameText: {fileID: 329246554}
   itemBuffText: {fileID: 1963456409}
   itemImage: {fileID: 214566870}
+--- !u!114 &1985031722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985031714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3267467c945e41c69d92f64516a03a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveManager
+  slotCount: 3
 --- !u!1 &1989692209
 GameObject:
   m_ObjectHideFlags: 0

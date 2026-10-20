@@ -44,4 +44,10 @@ public class SkillPointManager : MonoBehaviour
         OnSkillPointsChanged?.Invoke(AvailableSkillPoints);
         return true;
     }
+
+       public void SetSkillPoints(int n)
+   {
+       AvailableSkillPoints = Mathf.Max(0, n);
+       OnSkillPointsChanged?.Invoke(AvailableSkillPoints);
+   }
 }
