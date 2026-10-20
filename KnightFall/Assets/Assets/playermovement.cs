@@ -69,12 +69,12 @@ public class PlayerMovement : MonoBehaviour
         lastAttackTime = Time.time;
         animator.SetTrigger("Attack");
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            Debug.Log("Hit: " + enemy.name);
-            // enemy.GetComponent<EnemyHealth>()?.TakeDamage(10);
-        }
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+    foreach (Collider2D hit in hitEnemies)
+    {
+        Enemy enemy = hit.GetComponentInParent<Enemy>();
+        if (enemy != null) enemy.TakeDamage(20);
+    }
     }
 
     void OnDrawGizmosSelected()
