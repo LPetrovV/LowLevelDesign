@@ -8,6 +8,39 @@ using UnityEngine;
 // It gathers the game state into SaveData, and applies a slot back after a load.
 public class SaveManager : MonoBehaviour
 {
+
+    [Tooltip("Keep this equal to the slot count on your SaveSlotMenu.")]
+    public int slotCount = 3;
+
+    bool ready;   // false while the scene is starting up or a save is being applied
+
+    void OnEnable()  { RespawnHandler.OnCheckpointActivated += OnCheckpoint; }
+    void OnDisable() { RespawnHandler.OnCheckpointActivated -= OnCheckpoint; }
+
+    void OnCheckpoint()
+    {
+        if (ready) AutoSave();
+    }
+
+    public void AutoSave()
+    {
+        int slot = SaveSystem.CurrentSlot;
+
+        // New game with no slot chosen yet: use the first empty slot.
+        if (slot < 0)
+        {   
+            for (int i = 0; i < slotCount; i++)
+                if (!SaveSystem.HasSave(i)) { slot = i; break; }
+        }
+
+        if (slot < 0)
+        {
+            Debug.Log("Autosave skipped: no slot selected and all slots are full.");
+            return;
+        }
+
+        SaveToSlot(slot);
+    }
     public static SaveManager Instance { get; private set; }
 
     float playTime;
@@ -42,6 +75,7 @@ public class SaveManager : MonoBehaviour
             enemyIds[e] = StableId(e.transform);
 
         if (loading) Apply(SaveSystem.Read(slot));
+        ready = true; 
     }
 
     // ---------- Saving ----------

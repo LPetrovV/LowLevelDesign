@@ -6,6 +6,8 @@ public class RespawnHandler : MonoBehaviour
     public static Vector3 RespawnLocation { get; private set; } = Vector3.zero;
     public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
 
+    public static event System.Action OnCheckpointActivated;
+
     private GameObject player;
 
     
@@ -23,6 +25,7 @@ public class RespawnHandler : MonoBehaviour
         RespawnLocation = spawnPoint.transform.position;
         spawnPoint.ActivateSpawnPoint(); // Activate the new spawn point
         Debug.Log("Respawn location set to: " + RespawnLocation);
+        OnCheckpointActivated?.Invoke();
     }
 
     public void DeactivateAllSpawnPoints()
@@ -43,4 +46,6 @@ public class RespawnHandler : MonoBehaviour
             player.transform.position = RespawnLocation;
         }
     }
+
+    
 }
