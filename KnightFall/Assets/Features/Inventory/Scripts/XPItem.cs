@@ -11,6 +11,6 @@ public class XPItem : Item
 
     public override void Use(PlayerStats playerStats)
     {
-        playerStats.AddXP(xpBuff);
+        playerStats.xp += xpBuff;
     }
 }
